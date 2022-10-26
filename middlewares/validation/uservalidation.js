@@ -33,6 +33,21 @@ const postSignupSchema = Joi.object({
   }),
 }).unknown(true);
 
+const postLoginSchema = Joi.object({
+  body: Joi.object({
+    email: Joi.string()
+      .email({ tlds: true })
+      .required()
+      .error(new CustomError(404, "Invalid_email")),
+    password: Joi.string()
+      .min(4)
+      .max(12)
+      .required()
+      .error(new CustomError(404, "Invalid_password")),
+  }),
+}).unknown(true);
+
 module.exports = {
   postSignupSchema,
+  postLoginSchema,
 };
