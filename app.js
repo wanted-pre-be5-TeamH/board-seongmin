@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 const router = require("./routes");
-const { errorHandler } = require("./utils/ErrorHandler");
+const { errorHandler, catchAsync } = require("./utils/ErrorHandler");
 
 const createApp = () => {
   const app = express();
