@@ -64,6 +64,7 @@ const updateLogin = async ({ email, password }) => {
     exp: Math.floor(Date.now() / 1000) + Number(accessTtl),
     userId: user.userId,
     grade: user.grade,
+    scope: "user",
   };
 
   return jwt.sign(accessPayLoad, secretKey);
