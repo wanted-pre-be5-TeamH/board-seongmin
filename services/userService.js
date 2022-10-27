@@ -3,6 +3,7 @@ const CustomError = require("../utils/CustomError");
 const { v1: uuid } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { GRADE } = require("../config/userGradeType");
 
 const insertUser = async ({
   userName,
@@ -31,10 +32,11 @@ const insertUser = async ({
 
   const saltRound = 8;
   const bcryptPassword = await bcrypt.hash(password, saltRound);
-
+  const userGrade = GRADE[grade];
+  console.log(userGrade);
   await appData.query(
     `INSERT INTO user (user_id, email, user_name, grade, gender, age, phone, password) VALUES (?)`,
-    [[userId, email, userName, grade, gender, age, phone, bcryptPassword]]
+    [[userId, email, userName, userGrade, gender, age, phone, bcryptPassword]]
   );
   return;
 };
@@ -63,7 +65,6 @@ const updateLogin = async ({ email, password }) => {
   const accessPayLoad = {
     exp: Math.floor(Date.now() / 1000) + Number(accessTtl),
     userId: user.userId,
-    grade: user.grade,
     scope: "user",
   };
 

@@ -6,6 +6,7 @@ const postBoardSchema = Joi.object({
     title: Joi.string().required().error(new CustomError(404, "Invalid_title")),
     text: Joi.string().required().error(new CustomError(404, "Invalid_text")),
     accessGrade: Joi.string()
+      .valid("all", "begginer", "senior")
       .required()
       .error(new CustomError(404, "Invalid_Access_Grade")),
     type: Joi.string()
