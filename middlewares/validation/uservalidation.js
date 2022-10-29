@@ -33,6 +33,10 @@ const postSignupSchema = Joi.object({
       .max(12)
       .required()
       .error(new CustomError(404, "Invalid_password")),
+    type: Joi.string()
+      .valid("user", "admin")
+      .required()
+      .error(new CustomError(404, "Invalid_type")),
   }),
 }).unknown(true);
 

@@ -2,7 +2,7 @@ const { appData } = require("../middlewares/dataSource");
 const CustomError = require("../utils/CustomError");
 const { v1: uuid } = require("uuid");
 const { BOARDTYPE } = require("../config/boardType");
-const { GRADE } = require("../config/userGradeType");
+const { GRADE } = require("../config/userType");
 
 const insertBoard = async (
   userId,
