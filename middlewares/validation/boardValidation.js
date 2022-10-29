@@ -15,6 +15,18 @@ const postBoardSchema = Joi.object({
   }),
 }).unknown(true);
 
+const getAdminBoardSchema = Joi.object({
+  body: Joi.object({
+    decoded: Joi.object({
+      scope: Joi.string()
+        .valid("admin")
+        .required()
+        .error(new CustomError(403, "FORBIDDEN")),
+    }).unknown(true),
+  }),
+}).unknown(true);
+
 module.exports = {
   postBoardSchema,
+  getAdminBoardSchema,
 };

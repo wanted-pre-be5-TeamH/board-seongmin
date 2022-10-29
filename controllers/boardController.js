@@ -2,6 +2,7 @@ const {
   insertBoard,
   selectFreeBoard,
   selectNotice,
+  selectAdminBoard,
 } = require("../services/boardService");
 
 const postBoard = async (req, res) => {
@@ -21,8 +22,14 @@ const getNotice = async (req, res) => {
   return res.status(200).json(notices);
 };
 
+const getAdminBoard = async (req, res) => {
+  const adminBoards = await selectAdminBoard();
+  return res.status(200).json(adminBoards);
+};
+
 module.exports = {
   postBoard,
   getFreeBoard,
   getNotice,
+  getAdminBoard,
 };
