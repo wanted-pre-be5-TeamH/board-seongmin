@@ -10,7 +10,10 @@ const postSignupSchema = Joi.object({
       .email({ tlds: true })
       .required()
       .error(new CustomError(404, "Invalid_email")),
-    grade: Joi.string().required().error(new CustomError(404, "Invalid_grade")),
+    grade: Joi.string()
+      .valid("all", "begginer", "senior")
+      .required()
+      .error(new CustomError(404, "Invalid_grade")),
     gender: Joi.string()
       .valid("M", "F")
       .required()
