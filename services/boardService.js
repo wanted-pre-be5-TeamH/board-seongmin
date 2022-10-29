@@ -67,7 +67,25 @@ const selectFreeBoard = async (userId) => {
   return board;
 };
 
+const selectNotice = async () => {
+  const noticeType = BOARDTYPE["NOTICE"];
+  return await appData.query(
+    `
+    SELECT
+      board_id noticeId,
+      title,
+      text,
+      type,
+      created
+    FROM board
+    WHERE type = ?
+    `,
+    [noticeType]
+  );
+};
+
 module.exports = {
   insertBoard,
   selectFreeBoard,
+  selectNotice,
 };
