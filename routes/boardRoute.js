@@ -7,9 +7,11 @@ const {
   postBoard,
   getFreeBoard,
   getNotice,
+  getAdminBoard,
 } = require("../controllers/boardController");
 const {
   postBoardSchema,
+  getAdminBoardSchema,
 } = require("../middlewares/validation/boardValidation");
 
 router
@@ -18,5 +20,12 @@ router
 
 router.route("/freeboard").get(validateToken, catchAsync(getFreeBoard));
 router.route("/notice").get(catchAsync(getNotice));
+router
+  .route("/admin")
+  .get(
+    validateToken,
+    validator(getAdminBoardSchema),
+    catchAsync(getAdminBoard)
+  );
 
 module.exports = router;

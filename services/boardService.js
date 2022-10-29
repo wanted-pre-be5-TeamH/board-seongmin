@@ -84,8 +84,26 @@ const selectNotice = async () => {
   );
 };
 
+const selectAdminBoard = async () => {
+  const adminBoardType = BOARDTYPE["ADMIN"];
+  return await appData.query(
+    `
+    SELECT
+      board_id adminBoardId,
+      title,
+      text,
+      type,
+      created
+    FROM board
+    WHERE type = ?
+    `,
+    [adminBoardType]
+  );
+};
+
 module.exports = {
   insertBoard,
   selectFreeBoard,
   selectNotice,
+  selectAdminBoard,
 };
