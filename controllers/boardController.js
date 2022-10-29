@@ -1,4 +1,8 @@
-const { insertBoard, selectFreeBoard } = require("../services/boardService");
+const {
+  insertBoard,
+  selectFreeBoard,
+  selectNotice,
+} = require("../services/boardService");
 
 const postBoard = async (req, res) => {
   const { userId, scope } = req.body.decoded;
@@ -12,7 +16,13 @@ const getFreeBoard = async (req, res) => {
   return res.status(200).json(boards);
 };
 
+const getNotice = async (req, res) => {
+  const notices = await selectNotice();
+  return res.status(200).json(notices);
+};
+
 module.exports = {
   postBoard,
   getFreeBoard,
+  getNotice,
 };
